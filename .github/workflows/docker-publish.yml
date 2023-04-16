@@ -21,7 +21,7 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
   # n8n version
-  N8N_VERSION: '0.222.1'
+  N8N_VERSION: '0.222.2'
 
 
 jobs:
