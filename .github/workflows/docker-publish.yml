@@ -68,6 +68,12 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      # Source environment variables from the env.sh file and set N8N_VERSION
+      - name: Set up environment variables
+        run: |
+          source env.sh
+          export N8N_VERSION=$N8N_VERSION
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -82,11 +88,6 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             N8N_VERSION=${{ env.N8N_VERSION }}
-          run: |
-            # Source environment variables from the env.sh file
-            source env.sh
-            # Set N8N_VERSION environment variable
-            export N8N_VERSION=$N8N_VERSION
 
 
       # Sign the resulting Docker image digest except on PRs.
