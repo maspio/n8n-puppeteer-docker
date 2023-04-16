@@ -82,9 +82,11 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             N8N_VERSION=${{ env.N8N_VERSION }}
-          env:
+          run: |
             # Source environment variables from the env.sh file
             source env.sh
+            # Set N8N_VERSION environment variable
+            export N8N_VERSION=$N8N_VERSION
 
 
       # Sign the resulting Docker image digest except on PRs.
