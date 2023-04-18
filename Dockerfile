@@ -15,7 +15,7 @@ USER root
 # it needs to build it correctly.
 RUN apk --update add --virtual build-dependencies python3 build-base ca-certificates && \
 	npm config set python "$(which python3)" && \
-	npm_config_user=root npm install -g full-icu n8n@${N8N_VERSION} && \
+	npm_config_user=root npm install -g full-icu n8n@${N8N_VERSION} puppeteer && \
 	apk del build-dependencies \
 	&& rm -rf /root /tmp/* /var/cache/apk/* && mkdir /root;
 
@@ -33,7 +33,7 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Install n8n-nodes-puppeteer
-RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-puppeteer && npm install puppeteer
+RUN cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-puppeteer
 
 # Install fonts
 RUN apk --no-cache add --virtual fonts msttcorefonts-installer fontconfig && \
